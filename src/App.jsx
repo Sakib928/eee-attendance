@@ -6,8 +6,17 @@ import Tableitem from './components/Tableitem';
 function App() {
   const [items, setItems] = useState([]);
 
+ 
   useEffect(() => {
-    axios.get('http://192.168.2.143:5001/fingerprint')
+    const interval = setInterval(() => {
+      window.location.reload();
+    }, 3000); // reload every 5 seconds
+
+    return () => clearInterval(interval); // clean up
+  }, []);
+
+  useEffect(() => {
+    axios.get('http://10.170.193.146:5001/fingerprint')
       .then(response => {
         setItems(response.data);
       })
